@@ -1,4 +1,16 @@
+version: "3.9"
+
 services:
+  web:
+    build: .
+    container_name: csv_ingestor_web
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg://kaggle:kaggle@db:5432/kaggle_data
+    depends_on:
+      - db
+
   db:
     image: postgres:16
     container_name: kaggle_db
