@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dataset Rows</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <div class="max-w-6xl mx-auto mt-12 p-8 bg-white shadow rounded-lg">
+
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-semibold text-gray-800">
+        Dataset Preview (Page {{ page }})
+      </h1>
+
+      <a href="/" class="bg-gray-700 hover:bg-black text-white px-4 py-2 rounded shadow">
+        ← Back to Upload
+      </a>
+    </div>
+
+    {% if rows %}
+    <div class="overflow-x-auto">
+      <table class="min-w-full border border-gray-300 rounded">
+        <thead class="bg-gray-800 text-white">
+          <tr>
+            {% for key in rows[0].keys() %}
+            <th class="px-4 py-2 text-left text-sm font-medium border-b border-gray-600">
+              {{ key }}
+            </th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+          <tr class="odd:bg-gray-50 even:bg-white hover:bg-blue-50">
+            {% for value in row.values() %}
+            <td class="px-4 py-2 text-sm text-gray-700 border-b">
+              {{ value }}
+            </td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Simple Pagination (Next only) -->
+    {% if has_next %}
+    <div class="flex justify-center mt-6">
+      <a href="/rows?page={{ page + 1 }}&page_size={{ page_size }}"
+        class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded shadow">
+        Next →
+      </a>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <p class="text-gray-600 text-center mt-10">No rows found.</p>
+    {% endif %}
+
+  </div>
+
+</body>
+</html>

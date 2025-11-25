@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: kaggle_db
+    environment:
+      POSTGRES_USER: kaggle
+      POSTGRES_PASSWORD: kaggle
+      POSTGRES_DB: kaggle_data
+    ports:
+      - "5432:5432"
+    volumes:
+      - kaggle_pgdata:/var/lib/postgresql/data
+
+volumes:
+  kaggle_pgdata:
