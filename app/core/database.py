@@ -1,13 +1,13 @@
+import os
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
-from app.core.config import settings
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-engine = create_engine(settings.DATABASE_URL, echo=False)
+DATABASE_URL = os.environ.get("DATABASE_URL") or \
+    "postgresql+psycopg://kaggle:kaggle@localhost:5432/kaggle_data"
 
+engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
-
-class Base(DeclarativeBase):
-    pass
+Base = declarative_base()
 
 def get_db():
     db = SessionLocal()
