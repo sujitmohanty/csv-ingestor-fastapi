@@ -1,4 +1,4 @@
-# CSV Ingestor FastAPI 🚀
+# CSV Ingestor FastAPI 
 
 A full-stack FastAPI application that allows users to:
 
